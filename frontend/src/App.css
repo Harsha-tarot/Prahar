@@ -1,0 +1,8 @@
+/* App-level overrides */
+#root {
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+}
