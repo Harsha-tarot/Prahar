@@ -10,7 +10,7 @@ function noise(x, z) {
   );
 }
 
-export default function TerrainMap({ threatCoordinates = [], threatLevel = 'LOW' }) {
+export default function TerrainMap({ threatCoordinates = [], threatLevel = 'LOW', videoUrl }) {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
@@ -35,6 +35,25 @@ export default function TerrainMap({ threatCoordinates = [], threatLevel = 'LOW'
     const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 500);
     camera.position.set(0, 45, 65);
     camera.lookAt(0, 0, 0);
+
+    // ── Video Texture ──
+    let videoTexture = null;
+    let vidElt = null;
+    if (videoUrl) {
+      vidElt = document.createElement('video');
+      vidElt.src = videoUrl;
+      vidElt.crossOrigin = 'Anonymous';
+      vidElt.loop = true;
+      vidElt.muted = true;
+      vidElt.playsInline = true;
+      vidElt.play().catch(() => {});
+
+      videoTexture = new THREE.VideoTexture(vidElt);
+      videoTexture.minFilter = THREE.LinearFilter;
+      videoTexture.magFilter = THREE.LinearFilter;
+      videoTexture.format = THREE.RGBAFormat;
+      videoTexture.colorSpace = THREE.SRGBColorSpace;
+    }
 
     // ── Renderer ──
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -70,8 +89,14 @@ export default function TerrainMap({ threatCoordinates = [], threatLevel = 'LOW'
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     geometry.computeVertexNormals();
 
-    const terrainMat = new THREE.MeshLambertMaterial({
-      vertexColors: true,
+    const terrainMat = new THREE.MeshStandardMaterial({
+      vertexColors: !videoTexture,
+      map: videoTexture || null,
+      displacementMap: videoTexture || null,
+      displacementScale: videoTexture ? 6.0 : 0.0,
+      color: videoTexture ? 0xffffff : 0xffffff,
+      roughness: 0.8,
+      metalness: 0.2,
       wireframe: false,
     });
 
@@ -201,12 +226,17 @@ export default function TerrainMap({ threatCoordinates = [], threatLevel = 'LOW'
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameRef.current);
+      if (vidElt) {
+        vidElt.pause();
+        vidElt.src = "";
+      }
+      if (videoTexture) videoTexture.dispose();
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
       }
       renderer.dispose();
     };
-  }, [coordsStr]);
+  }, [coordsStr, videoUrl]);
 
   return (
     <div

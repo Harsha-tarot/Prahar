@@ -349,6 +349,7 @@ export default function App() {
             <TerrainMap
               threatCoordinates={result?.threat_coordinates || []}
               threatLevel={threatLevel}
+              videoUrl={result?.video_url ? `${API_BASE}${result.video_url}` : null}
             />
             <div style={{
               position: 'absolute',
