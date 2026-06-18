@@ -1,6 +1,6 @@
 # PRAHAR – Real-Time Edge AI Reconnaissance System
 
-> **Hackathon-ready** · YOLOv8 · OpenCV · Flask · React · Three.js
+>  YOLOv8 · OpenCV · Flask · React · Three.js
 
 ![PRAHAR System](https://img.shields.io/badge/PRAHAR-Edge_AI-00ff8c?style=for-the-badge&logo=radar&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python)
