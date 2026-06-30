@@ -18,6 +18,15 @@ app.config["OUTPUT_FOLDER"] = OUTPUT_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 500 * 1024 * 1024  # 500 MB
 
 
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({
+        "name": "PRAHAR Edge AI – Backend API",
+        "status": "online",
+        "endpoints": ["/health", "/analyze-video", "/video/<filename>"]
+    })
+
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "system": "PRAHAR Edge AI"})
