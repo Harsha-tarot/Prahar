@@ -82,8 +82,9 @@ def serve_upload(filename):
 
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     print("=" * 60)
     print("  PRAHAR – Real-Time Edge AI Reconnaissance System")
-    print("  Backend running on http://localhost:5000")
+    print(f"  Backend running on http://localhost:{port}")
     print("=" * 60)
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=False, host="0.0.0.0", port=port)
