@@ -6,6 +6,19 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python)
 ![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react)
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-FF4040?style=flat-square)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-prahar--eight.vercel.app-00ff8c?style=flat-square)](https://prahar-eight.vercel.app/)
+[![Backend](https://img.shields.io/badge/🤗_Backend-HuggingFace_Spaces-FFD21E?style=flat-square)](https://huggingface.co/spaces/Harsha-tarot117/prahar-backend)
+
+---
+
+## 🌐 Live Deployment
+
+> **Shipped and running — no setup required.**
+
+| Layer | Platform | URL |
+|-------|----------|-----|
+| 🖥️ **Frontend** | Vercel | [prahar-eight.vercel.app](https://prahar-eight.vercel.app/) |
+| ⚙️ **Backend API** | HuggingFace Spaces (Docker) | [harsha-tarot117-prahar-backend.hf.space](https://harsha-tarot117-prahar-backend.hf.space/) |
 
 ---
 
