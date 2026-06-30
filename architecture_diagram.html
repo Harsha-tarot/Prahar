@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAHAR System Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --container-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #3b82f6;
+            --accent: #10b981;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .architecture-wrapper {
+            width: 100%;
+            max-width: 800px;
+            background: var(--container-bg);
+            border-radius: 24px;
+            padding: 30px 30px 40px 30px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .layer {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 24px 20px 20px 20px;
+            border: 1px dashed #cbd5e1;
+            position: relative;
+        }
+
+        .layer-title {
+            position: absolute;
+            top: -14px;
+            left: 24px;
+            background: var(--container-bg);
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .layer-content {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .node {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 20px;
+            min-width: 160px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .node.highlight {
+            border-color: var(--accent);
+            border-width: 2px;
+        }
+
+        .icon {
+            font-size: 20px;
+            color: var(--primary);
+            background: #eff6ff;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .node.highlight .icon {
+            color: var(--accent);
+            background: #ecfdf5;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="architecture-wrapper">
+        <h1>PRAHAR System Architecture</h1>
+
+        <!-- LAYER 1: Field Assets -->
+        <div class="layer">
+            <div class="layer-title">1. Field Assets</div>
+            <div class="layer-content">
+                <div class="node" id="n-uav">
+                    <div class="icon"><i class="fa-solid fa-drone"></i></div>
+                    <div class="title">UAV Camera Stream</div>
+                </div>
+                <div class="node" id="n-telemetry">
+                    <div class="icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                    <div class="title">GPS & Telemetry</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAYER 2: Edge Node -->
+        <div class="layer">
+            <div class="layer-title">2. Edge Computing Node</div>
+            <div class="layer-content" style="flex-direction: column; align-items: center; gap: 30px;">
+                <div style="display: flex; gap: 60px;">
+                    <div class="node" id="n-yolo">
+                        <div class="icon"><i class="fa-solid fa-crosshairs"></i></div>
+                        <div class="title">YOLOv8n Detection</div>
+                    </div>
+                    <div class="node" id="n-lum">
+                        <div class="icon"><i class="fa-solid fa-mountain"></i></div>
+                        <div class="title">Luminance 3D Mapping</div>
+                    </div>
+                </div>
+                <div class="node highlight" id="n-threat">
+                    <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="title">Threat Assessment Engine</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAYER 3: Client -->
+        <div class="layer">
+            <div class="layer-title">3. Command Center Dashboard</div>
+            <div class="layer-content">
+                <div class="node" id="n-deck">
+                    <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="title">Deck.gl 3D Environment</div>
+                </div>
+                <div class="node" id="n-ui">
+                    <div class="icon"><i class="fa-solid fa-desktop"></i></div>
+                    <div class="title">Mission HUD & Alerts</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- LeaderLine Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leader-line/1.0.7/leader-line.min.js"></script>
+    <script>
+        window.addEventListener('load', function() {
+            // Helper to draw lines
+            function drawLine(startId, endId, label, options = {}) {
+                const start = document.getElementById(startId);
+                const end = document.getElementById(endId);
+                if (!start || !end) return;
+
+                const defaultOptions = {
+                    color: '#94a3b8',
+                    size: 2,
+                    path: 'straight',
+                    startSocket: 'bottom',
+                    endSocket: 'top',
+                    dropShadow: true,
+                    dash: false
+                };
+
+                const merged = { ...defaultOptions, ...options };
+
+                const line = new LeaderLine(start, end, merged);
+                
+                if (label) {
+                    line.setOptions({
+                        middleLabel: LeaderLine.pathLabel(label, {
+                            color: '#1e293b',
+                            outlineColor: '#ffffff',
+                            outline: 8,
+                            fontWeight: 700,
+                            fontSize: '11px',
+                            fontFamily: 'Inter'
+                        })
+                    });
+                }
+                return line;
+            }
+
+            // Field to Edge
+            drawLine('n-uav', 'n-yolo', 'Video Stream');
+            drawLine('n-uav', 'n-lum', '');
+            drawLine('n-telemetry', 'n-lum', 'Sensor Data');
+
+            // Inside Edge
+            drawLine('n-yolo', 'n-threat', 'Tracked Entities');
+            drawLine('n-lum', 'n-threat', 'Depth Map');
+
+            // Edge to Client
+            drawLine('n-threat', 'n-deck', '3D Coordinates', { color: '#10b981', size: 3 });
+            drawLine('n-threat', 'n-ui', 'Live Alerts', { color: '#10b981', size: 3 });
+
+        });
+    </script>
+</body>
+</html>

@@ -7,3 +7,19 @@ frontend/dist/
 *.avi
 *.mov
 .DS_Store
+node_modules
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Environment variable files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Python cache
+*.pyc
+*.pyo
+__pycache__/

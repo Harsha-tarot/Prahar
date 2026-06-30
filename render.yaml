@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: prahar-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --timeout 600 --workers 1
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

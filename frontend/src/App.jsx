@@ -4,7 +4,7 @@ import MetricsPanel from './components/MetricsPanel';
 import TerrainMap from './components/TerrainMap';
 import ActivityLog from './components/ActivityLog';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 function Clock() {
   const [time, setTime] = useState(new Date());
