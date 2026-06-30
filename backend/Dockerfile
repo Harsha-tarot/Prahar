@@ -18,6 +18,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Download YOLOv8n model at build time (avoids committing binary to git)
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
+
 # Copy app code
 COPY . .
 
@@ -28,3 +31,4 @@ RUN mkdir -p uploads outputs
 EXPOSE 7860
 
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:7860", "--timeout", "600", "--workers", "1"]
+

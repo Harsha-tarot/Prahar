@@ -1,6 +1,7 @@
 backend/uploads/*
 backend/outputs/*
 backend/__pycache__/
+backend/yolov8n.pt
 frontend/node_modules/
 frontend/dist/
 *.mp4
